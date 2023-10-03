@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interfaz de administración</title>
+</head>
+<body>
+    <h1>NodePop</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Opción</th>
+                <th>Precio</th>
+                <th>Foto</th>
+                <th>Tags</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% ads.forEach(ad => { %>
+                <tr>
+                    <td><%= ad.name %></td>
+                    <td><%= ad.option ? 'Venta' : 'Busqueda' %></td>
+                    <td><%= ad.price %></td>
+                    <td><img src="<%= ad.img %>" alt="Foto" width="100"></td>
+                    <td><%= ad.tags.join(', ') %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>

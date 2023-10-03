@@ -1,0 +1,25 @@
+{
+  "name": "nodepop",
+  "version": "1.0.0",
+  "description": "Develop the API that will run on the server of a second-hand item selling service called Nodepop. Imagine that this API you are building will be used by other iOS or Android developers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexjust-data/FullStack_NodeApi.git"
+  },
+  "keywords": [
+    "api"
+  ],
+  "author": "Alex Just Rodriguez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexjust-data/FullStack_NodeApi/issues"
+  },
+  "homepage": "https://github.com/alexjust-data/FullStack_NodeApi#readme",
+  "dependencies": {
+    "express-generator": "^4.16.1"
+  }
+}
