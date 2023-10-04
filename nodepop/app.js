@@ -27,25 +27,25 @@ app.use('/admin', require('./routes/admin'));
 
 
 
-const Ad = require('./models/ad');
+const Ad = require('./models/Ad');
 
-// Crear un nuevo anuncio
-const newAd = new Ad({
-    name: 'Bicicleta',
-    option: true,
-    price: 100,
-    img: 'url_de_la_imagen',
-    tags: ['deporte', 'transporte']
-});
+// // Crear un nuevo anuncio
+// const newAd = new Ad({
+//     name: 'Bicicleta',
+//     option: true,
+//     price: 100,
+//     img: 'url_de_la_imagen',
+//     tags: ['deporte', 'transporte']
+// });
 
-// Guardar el anuncio en la base de datos
-newAd.save()
-    .then(ad => {
-        console.log('Anuncio guardado:', ad);
-    })
-    .catch(err => {
-        console.error('Error guardando el anuncio:', err);
-    });
+// // Guardar el anuncio en la base de datos
+// newAd.save()
+//     .then(ad => {
+//         console.log('Anuncio guardado:', ad);
+//     })
+//     .catch(err => {
+//         console.error('Error guardando el anuncio:', err);
+//     });
 
 
 
