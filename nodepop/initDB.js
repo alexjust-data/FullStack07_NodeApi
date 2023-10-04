@@ -1,57 +1,52 @@
 'use strict';
 
 const readLine = require('node:readline');
-// inicio la base de datos
-const connection = require('./lib/connectMongoose'); // conecto a la base de datos
-const Ad = require('./models/Ad'); // cargo el modelo
-const initData = require('./ads.json'); // cargo ficheros con datos iniciales
 
-// cazo el error si lo hay con la bbdd o el modelo
-main().catch(err => console.log('Hubo un error --> ', err));
+const connection = require('./lib/connectMongoose'); // conect to database
+const Ad = require('./models/Ad'); // load the model
+const initData = require('./ads.json'); // load files with intial data
 
-// para usar comodamente el async creo 
+
+main().catch(err => console.log('There was a mistake --> ', err));
+
+
 async function main() {
-
-     // espero a que se conecte a la base de datos
+     // I wait for it to connect to the database
     await new Promise(resolve => connection.once('open', resolve))
 
     const borrar = await pregunta(
-        "\nEstas seguro que deseas boorar los datos y cargar datos iniciales? si/no --> "
-    )
-    if (!borrar) {
-        process.exit();
-      }
+        "\nAre you sure you want to delete the data and load initial data?? yes/no --> "
+    ) 
+    if (!borrar) { process.exit(); }
 
-
-    // inicializar la coleccion de agentes
-    await initAds(); // la defino abajo
-
-    // en un script la conezion a ala base de datos la tenemos que terminar
-    // he tenido que exportar module.exports = mongoose.connection;
+    await initAds(); // initialize the ad collection, defined below
+    
     connection.close();
-
 }
 
 
 
 
 async function initAds() {
-    // borrar todos los documentos de a colleccion de agentes
-    const deleted = await Ad.deleteMany();
-    console.log(`Eliminados ${deleted.deletedCount} ads.`);
+    const deleted = await Ad.deleteMany(); // delete all documents from the Ad collection
+    console.log(`Eliminates ${deleted.deletedCount} ads.`);
 
-    // crear agentes iniciales
-    // const inserted = await Ad.insertMany(initData.agentes);
-    const adsToInsert = initData.anuncios.map(ad => ({
-        name: ad.nombre,
-        option: ad.venta,
-        price: ad.precio,
-        img: ad.foto,
-        tags: ad.tags
-    }));
+    try {
+        // create initial ads
+        const adsToInsert = initData.anuncios.map(ad => ({
+            name: ad.name,
+            option: ad.option,
+            price: ad.price,
+            img: ad.img,
+            tags: ad.tags
+        }));
     
-    const inserted = await Ad.insertMany(adsToInsert);
-    console.log(`Creados ${inserted.length} ads.`);
+        const inserted = await Ad.insertMany(adsToInsert);
+        console.log(`Creates ${inserted.length} ads.`);
+
+    } catch (error) {
+        console.log("Error loading ads:", error);
+    }
 }
 
 /**
@@ -66,24 +61,24 @@ async function initAds() {
 
 
 
-  /**
-   * ¿seguro que deseas installar? si o no
-   * requiere una librería para que el usuario escriba, readline
-   */
+/**
+ * Are you sure you want to delete the data and load initial data?? yes/no
+ * requires a library for the user to write, readline
+ */
 
-  function pregunta(texto) {
+function pregunta(texto) {
+
     return new Promise((resolve, reject) => {
 
-      // conectar readline con la consola
-      const ifc = readLine.createInterface({
-        input: process.stdin,
-        output: process.stdout
-      });
+        // conectar readline con la consola
+        const ifc = readLine.createInterface({
+            input: process.stdin,
+            output: process.stdout
+        });
 
-      ifc.question(texto, respuesta => {
-        ifc.close();
-        resolve(respuesta.toLowerCase() === 'si');
-      })
-
+        ifc.question(texto, respuesta => {
+            ifc.close();
+            resolve(respuesta.toLowerCase() === 'yes');
+        })
     });
-  }
+}

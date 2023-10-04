@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const basicAuthMiddleware = require('./lib/basicAuthMiddleware');
+const swaggerMiddleware = require('./lib/swaggerMiddleware');
 
 require('./lib/connectMongoose');
 
@@ -23,31 +25,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
-app.use('/admin', require('./routes/admin'));
+app.use('/admin', basicAuthMiddleware, require('./routes/admin')); // protected
 
+// Serves static files from the 'public' folder
+// app.use(express.static('public/images'));
 
 
 const Ad = require('./models/Ad');
 
-// // Crear un nuevo anuncio
-// const newAd = new Ad({
-//     name: 'Bicicleta',
-//     option: true,
-//     price: 100,
-//     img: 'url_de_la_imagen',
-//     tags: ['deporte', 'transporte']
-// });
-
-// // Guardar el anuncio en la base de datos
-// newAd.save()
-//     .then(ad => {
-//         console.log('Anuncio guardado:', ad);
-//     })
-//     .catch(err => {
-//         console.error('Error guardando el anuncio:', err);
-//     });
-
-
+/**
+ * API
+ */
+app.use('/api-doc', swaggerMiddleware);
+app.use('/api/ads', require('./routes/api/ads'));
 
 
 // catch 404 and forward to error handler

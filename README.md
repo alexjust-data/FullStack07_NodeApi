@@ -91,4 +91,18 @@ practice_nodepop> db.ad.insertOne(
 }
 
 
+% npm install mongoose
+
+# ./nodepop
+npm run dev
+```
+
+
+```sh
+# HTTP Basic Authentication credentials in Node.js to ./admin
+% npm install basic-auth
+
+# popular middleware for handling file uploads in Node.js web applications
+% npm install multer
+
 ```
