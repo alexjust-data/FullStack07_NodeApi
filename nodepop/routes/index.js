@@ -50,15 +50,12 @@ router.get('/', async (req, res, next) => {
     const ads = await Ad.lista(filter, skip, limit, sort, fields);
 
     if (req.originalUrl.startsWith('/api/')) {
-      // Si la solicitud proviene de la API, responde con JSON
+      // If the request comes from the API, respond with JSON
       res.json({ results: ads });
     } else {
-      // Si la solicitud proviene de la interfaz de administración, renderiza la vista
-      res.render('admin', { ads });
+      // If the request comes from the management interface, render the view
+      res.render('index', { ads });
     }
-
-    // // Renderiza la vista de la página principal con los anuncios
-    // res.render('index', { ads }); // Asegúrate de que estás usando la vista correcta
   } catch (err) {
     next(err);
   }
