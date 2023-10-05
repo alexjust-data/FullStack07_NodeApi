@@ -25,17 +25,24 @@ In production:
 
 ```sh
 npm start
-````
+```
 
 In development:
-
 ```sh
 npm run dev
-````
-
+```
 
 
 ### Exemples
+
+Admin can add ads
+
+```sh
+http://127.0.0.1:3000/admin
+# username : 'admin'
+# userpass : '1234'
+```
+Paths
 
 ```sh
 # Filters
@@ -65,7 +72,12 @@ http://127.0.0.1:3000/?price=10-
 http://127.0.0.1:3000/?price=-100
 http://127.0.0.1:3000/?price=100
 
+```
+**API**
 
+
+
+```sh
 # multiples gets by api
 http://127.0.0.1:3000/api/ads?tag=mobile&option=false&name=ip&price=50-&start=0&limit=2&sort=price
 
