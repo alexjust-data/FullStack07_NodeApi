@@ -3,30 +3,30 @@ const router = express.Router();
 const Ad = require('../models/Ad');
 const multer = require('multer'); // upload img
 
-// Configura multer para cargar imágenes en una ubicación específica
+// Configure multer to upload images to a specific location
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/images'); // Ruta donde se guardarán las imágenes
+    cb(null, 'public/images'); // Path where the images will be stored
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname); // Nombre de archivo único
+    cb(null, Date.now() + '-' + file.originalname); // Unique filename
   }
 });
 
 const upload = multer({ storage: storage });
 
-// Ruta para procesar el formulario de creación de anuncios
+// Route to process the ad creation form
 router.post('/add-ad', upload.single('image'), async (req, res, next) => {
   try {
     const { name, option, price, tags } = req.body;
-    const image = req.file.filename; // Nombre del archivo de imagen cargado
+    const image = req.file.filename; // Name of the uploaded image file
 
-    // Crea un nuevo anuncio en la base de datos
+    // Create a new ad in the database
     const newAd = new Ad({ name, option, price, img: image, tags: tags.split(',') });
-    const adGuardado = await newAd.save();
+    const savedAd = await newAd.save();
 
-    // Renderiza la vista de la página principal con los anuncios actualizados
-    const ads = await Ad.lista(); // Otra vez, ajusta esto según tu lógica
+    // Render the main page view with the updated ads
+    const ads = await Ad.lista(); // Again, adjust this according to your logic
     res.redirect('/');
   } catch (error) {
     next(error);
@@ -35,7 +35,7 @@ router.post('/add-ad', upload.single('image'), async (req, res, next) => {
 
 
 router.get('/logout', (req, res) => {
-  res.clearHeader('WWW-Authenticate');
+  res.removeHeader('WWW-Authenticate');
   res.redirect('/');
 });
 
@@ -90,10 +90,10 @@ router.get('/', async (req, res, next) => {
     const ads = await Ad.lista(filter, skip, limit, sort, fields);
 
     if (req.originalUrl.startsWith('/api/')) {
-      // Si la solicitud proviene de la API, responde con JSON
+      // If the request comes from the API, respond with JSON
       res.json({ results: ads });
     } else {
-      // Si la solicitud proviene de la interfaz de administración, renderiza la vista
+      // If the request comes from the management interface, render the view
       res.render('admin', { ads });
     }
 
