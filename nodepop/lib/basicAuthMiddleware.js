@@ -15,8 +15,8 @@ module.exports = (req, res, next) => {
 
     if (!user || user.name !== 'admin' || user.pass !== '1234') {
         res.set('WWW-Authenticate', 'Basic realm=Authorization required');
-        res.redirect('/');
-        //res.sendStatus(401);
+        //res.redirect('/'); // if not authenticated, it redirects back to the root
+        res.sendStatus(401); // if not authenticated, it prompts for credentials
         return 
       }
     
