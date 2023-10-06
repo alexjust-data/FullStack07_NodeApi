@@ -50,14 +50,14 @@ http://127.0.0.1:3000/?fields=name%20-_id%20option
 # Filters
 http://127.0.0.1:3000/?tags=lifestyle,motor
 http://127.0.0.1:3000/?venta=true
-# Para buscar anuncios con un precio entre 10 y 100:
+# cheack ads price between 10 y 100:
 http://127.0.0.1:3000/?price=10-100
 http://127.0.0.1:3000/?price=10-
 http://127.0.0.1:3000/?price=-100
 http://127.0.0.1:3000/?price=100
 
 ```
-**API**
+Api
 
 ```sh
 # multiples gets by api
