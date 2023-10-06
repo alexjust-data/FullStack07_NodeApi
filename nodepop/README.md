@@ -4,7 +4,6 @@ The Nodepop Engine is a server-side solution crafted using Node.js alongside Exp
 
 ## Install
 Install dependencies:
-
 ```sh
 # create a file for dependencies `package.json`
 $ npm install
@@ -13,7 +12,6 @@ $ npm install
 Review database connection on /lib/connectMongoose.js (see "Start a MongoDB Server in MacOS or Linux")
 
 Load initial data:
-
 ```sh
 # this command deletes all the data in the database and create default data
 $ npm run init-db
@@ -22,11 +20,9 @@ $ npm run init-db
 ## Start
 
 In production:
-
 ```sh
 npm start
 ```
-
 In development:
 ```sh
 npm run dev
@@ -36,36 +32,24 @@ npm run dev
 ### Exemples
 
 Admin can add ads
-
 ```sh
 http://127.0.0.1:3000/admin
 # username : 'admin'
 # userpass : '1234'
 ```
 Paths
-
 ```sh
 # Filters
 http://127.0.0.1:3000/?name=Bicicleta
-
-
 # Pagination
 http://127.0.0.1:3000/?skip=2&limit=7
-
-
 # Sorting
 http://127.0.0.1:3000/?sort=-price%20name
-
-
 # Field Selection
 http://127.0.0.1:3000/?fields=name%20-_id%20option
-
-
 # Filters
 http://127.0.0.1:3000/?tags=lifestyle,motor
 http://127.0.0.1:3000/?venta=true
-
-
 # Para buscar anuncios con un precio entre 10 y 100:
 http://127.0.0.1:3000/?price=10-100
 http://127.0.0.1:3000/?price=10-
@@ -75,12 +59,9 @@ http://127.0.0.1:3000/?price=100
 ```
 **API**
 
-
-
 ```sh
 # multiples gets by api
 http://127.0.0.1:3000/api/ads?tag=mobile&option=false&name=ip&price=50-&start=0&limit=2&sort=price
-
 # res
 {
   "results": [
