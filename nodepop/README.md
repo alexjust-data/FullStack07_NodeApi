@@ -36,7 +36,7 @@ http://127.0.0.1:3000/admin
 # username : 'admin'
 # userpass : '1234'
 ```
-> with privileges to add ads
+> only admin with privileges to add ads
 
 Paths
 ```sh
