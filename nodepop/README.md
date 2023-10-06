@@ -19,24 +19,25 @@ $ npm run init-db
 
 ## Start
 
-In production:
 ```sh
+# Run in production mode
 npm start
-```
-In development:
-```sh
-npm run dev
+
+# or run in development mode
+npm run dev 
 ```
 
 
 ### Exemples
 
-Admin can add ads
+Admin 
 ```sh
 http://127.0.0.1:3000/admin
 # username : 'admin'
 # userpass : '1234'
 ```
+> with privileges to add ads
+
 Paths
 ```sh
 # Filters
