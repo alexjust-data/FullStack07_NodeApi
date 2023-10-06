@@ -57,6 +57,7 @@ db version v7.0.1
 # run mongo and open ports
 % cd /Applications/mongodb-macos-x86_64-7.0.1/bin
 % ./bin/mongod --dbpath ./data/db
+% ./bin/mongod --dbpath ./data/db --port 3002
 
 
 % mongosh --version
@@ -106,3 +107,5 @@ npm run dev
 % npm install multer
 
 ```
+
+Corrección de estilo https://eslint.org/
